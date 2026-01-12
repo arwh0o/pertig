@@ -48,3 +48,14 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
 
 // Public Feedback Route
 Route::post('/feedback', [App\Http\Controllers\FeedbackController::class, 'store'])->name('feedback.store');
+
+use Illuminate\Support\Facades\DB;
+
+Route::get('/db-test', function () {
+    try {
+        DB::connection()->getPdo();
+        return 'DB CONNECTED';
+    } catch (\Exception $e) {
+        return $e->getMessage();
+    }
+});
